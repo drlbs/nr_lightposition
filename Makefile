@@ -1,14 +1,20 @@
-##!smake
 
-include /usr/include/make/commondefs
+CC	= gcc
+TARGETS = lightposition
+LDLIBS = -lglut -lGLU -lGL -lm
+CFLAGS = -O2 
 
-TARGETS = transformation projection lightposition texture lightmaterial fog
-LLDLIBS = -lglut -lGLU -lGL -lXmu -lXext -lX11 -lm
-LCFLAGS = -fullwarn
 
-default		: $(TARGETS)
+lightposition	:  lightposition.o glm.o 
+	$(CC) -o lightposition lightposition.o  glm.o  $(LDLIBS)
 
-include $(COMMONRULES)
+lightposition.o	:	lightposition.c
+	$(CC) -c $(CFLAGS) lightposition.c
 
-$(TARGETS)	: $$@.o glm.o sgi.o
-	$(CCF) -o $@ $@.o glm.o sgi.o $(LDFLAGS)
+glm.o	:	glm.c
+	$(CC) -c $(CFLAGS) glm.c
+
+
+clean :
+	rm *.o
+	touch *.c
