@@ -2,7 +2,7 @@
 CC	= gcc
 TARGETS = lightposition
 LDLIBS = -lglut -lGLU -lGL -lm
-CFLAGS = -O2 
+CFLAGS = -O2 -std=c90 
 
 
 lightposition	:  lightposition.o glm.o 
